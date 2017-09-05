@@ -1,0 +1,75 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="css/animate.css">
+        <link rel="stylesheet" href="css/main.css">
+
+
+
+    </head>
+    <body>
+    <div class="wrap">
+
+        <p>
+            <button class="btn btn-primary" type="button" onclick="addbtn()" id="add">Добавить контакт</button>
+        </p>
+        <form class="navbar-search pull-left">
+            <input type="text" class="search-query" autocomplete="off" placeholder="Search" id="search" onkeyup="zeroSearch()" onblur="myBlurFunction()" onclick="blueWidth()">
+        </form>
+        <div class="fio" id="blanc">
+            <input id="firstName" class="input-medium" type="text" placeholder="Фамилия" autofocus><br/>
+            <input id="last_name" class="input-medium" type="text" placeholder="Имя"><br/>
+            <div id="wrap_phone">
+                <input id="phone" class="input-medium" type="text" placeholder="Телефон" maxlength="10" onkeypress="phoneValid(phone.value)">
+                <i class='icon-plus-sign' id="secondP" onclick="secondPhone()"></i>
+                <input id="phone2" class="input-medium" type="text" placeholder="Телефон #2">
+                <i class='icon-minus-sign' id="remSecondP" onclick="secondPhoneRemove()"></i><br/>
+            </div>
+            <div id ="wrap_email">
+                <input id="email" class="input-medium" type="text" placeholder="@email">
+                <i class='icon-plus-sign' id="secondE" onclick="secondEmail()"></i>
+                <input id="email2" class="input-medium" type="text" placeholder="@email #2">
+                <i class='icon-minus-sign' id="remSecondE" onclick="secondEmailRemove()"></i><br/>
+            </div>
+            <p style="background-color: red; color: white; display: none" class="error-block">Ty ne zapolnil odno ili bolshe poley</p>
+            <p>
+                <button class="btn btn-success saveMy" type="button" id="save" onclick="save (firstName.value, last_name.value, phone.value, email.value, phone2.value, email2.value)">Сохранить контакт</button>
+                <button class="btn btn-success changeMy" type="button" id="saveChange" onclick="saveChange (blanc.className, firstName.value, last_name.value, phone.value, email.value, phone2.value, email2.value)">Сохранить изменения</button>
+                <button class="btn btn-warning" type="button" id="cancel" onclick="cancel()">Передумал</button>
+            </p>
+        </div>
+        <div class="accordion" id="accordion2">
+
+        </div>
+        <!--<div class="list">-->
+            <!--<select size="10" multiple="multiple">-->
+            <!--<option>1</option>-->
+            <!--<option>2</option>-->
+            <!--<option>3</option>-->
+            <!--<option>4</option>-->
+            <!--<option>5</option>-->
+            <!--<option>6</option>-->
+            <!--<option>7</option>-->
+            <!--<option>8</option>-->
+            <!--<option>9</option>-->
+            <!--<option>10</option>-->
+            <!--</select>-->
+        <!--</div>-->
+        <p>
+            <button class="btn btn-primary" type="button" id="select" onclick="selectbtn()">Выйти из поиска</button>
+        </p>
+    </form>
+    </div>
+
+
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    </body>
+</html>
