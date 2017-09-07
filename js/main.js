@@ -48,7 +48,7 @@ function selectbtn() {
 function save (firstName, last_name, phone, email, phone2, email2) {
 
 
-if (firstName == "" || last_name == "" || phone == "" || email == ""){
+if (firstName == "" || last_name == "" || phone == "" ){
     //document.write("Ty ne zapolnil odno ili bolshe poley");
     //addbtn ();
     document.getElementsByClassName('error-block')[0].style.display = "inline-block";
@@ -95,7 +95,7 @@ function blueWidth() {
 }
 
 function zeroSearch(){
-    document.getElementById('select').style.display = 'block';
+    //document.getElementById('select').style.display = 'block';
 
     var out=[]
     console.log(search.value);

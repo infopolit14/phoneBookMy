@@ -2,7 +2,7 @@
 
 
 ### Demo version
-https://infopolit14.github.io/phoneBook
+https://infopolit14.github.io/phoneBookMy
 
 
 ### Sites screens 
