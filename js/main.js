@@ -15,12 +15,12 @@ if(localStorage['pb.contacts']){
 }
     function addbtn () {
     document.getElementById('blanc').style.display = 'block';
-    firstName.value=last_name.value=phone.value=phone2.value=email2.value=null;
+    firstName.value=last_name.value=phone.value=email.value=phone2.value=email2.value=null;
     document.getElementById ("firstName").focus ();
     document.getElementById('add').style.display = 'none';
     document.getElementById('search').style.display = 'none';
     document.getElementById('accordion2').style.display = 'none';
-    document.getElementById('select').style.display = 'none';
+   // document.getElementById('select').style.display = 'none';
     document.getElementById('saveChange').style.display = 'none';
     document.getElementById('save').style.display = 'inline-block';
 }
@@ -48,7 +48,7 @@ function selectbtn() {
 function save (firstName, last_name, phone, email, phone2, email2) {
 
 
-if (firstName == "" || last_name == "" || phone == "" ){
+if (firstName == "" || last_name == "" || phone == ""){
     //document.write("Ty ne zapolnil odno ili bolshe poley");
     //addbtn ();
     document.getElementsByClassName('error-block')[0].style.display = "inline-block";
@@ -61,7 +61,7 @@ if (firstName == "" || last_name == "" || phone == "" ){
     document.getElementById('add').style.display = 'block';
     document.getElementById('search').style.display = 'block';
     document.getElementById('accordion2').style.display = 'block';
-    document.getElementById('select').style.display = 'none';
+    //document.getElementById('select').style.display = 'none';
     contact={
         id:  new Date().getTime(),
         firstName:firstName  || "",
@@ -95,7 +95,7 @@ function blueWidth() {
 }
 
 function zeroSearch(){
-    //document.getElementById('select').style.display = 'block';
+    //document.getElementById('select').style.display = 'none';
 
     var out=[]
     console.log(search.value);
