@@ -15,7 +15,7 @@ if(localStorage['pb.contacts']){
 }
     function addbtn () {
     document.getElementById('blanc').style.display = 'block';
-    firstName.value=last_name.value=phone.value=email.value=phone2.value=email2.value=null;
+    firstName.value=last_name.value=phone.value=phone2.value=email2.value=null;
     document.getElementById ("firstName").focus ();
     document.getElementById('add').style.display = 'none';
     document.getElementById('search').style.display = 'none';
