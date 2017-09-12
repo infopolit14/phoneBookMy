@@ -23,13 +23,14 @@ if(localStorage['pb.contacts']){
    // document.getElementById('select').style.display = 'none';
     document.getElementById('saveChange').style.display = 'none';
     document.getElementById('save').style.display = 'inline-block';
+
 }
 function cancel() {
     document.getElementById('blanc').style.display = 'none';
     document.getElementById('add').style.display = 'block';
     document.getElementById('search').style.display = 'block';
     document.getElementById('accordion2').style.display = 'block';
-    document.getElementById('select').style.display = 'none';
+    //document.getElementById('select').style.display = 'none';
     document.getElementsByClassName('error-block')[0].style.display = "none";
 }
 function selectbtn() {
@@ -46,21 +47,59 @@ function selectbtn() {
     }
 }
 function save (firstName, last_name, phone, email, phone2, email2) {
+    var keys = ['firstName', 'last_name', 'phone', 'email', 'phone2', 'email2'];
+    for (var i=0;i<arguments.length;i++){
+        if (arguments[i] !== "") {$('#'+keys[i]).css({"border":""});}
+    }
 
 
-if (firstName == "" || last_name == "" || phone == ""){
-    //document.write("Ty ne zapolnil odno ili bolshe poley");
-    //addbtn ();
+if (firstName == "" ){
+    $('#firstName').css({"border":"1px solid red"});
     document.getElementsByClassName('error-block')[0].style.display = "inline-block";
+};
+    if ( last_name == "" ){
+        $('#last_name').css({"border":"1px solid red"});
+        document.getElementsByClassName('error-block')[0].style.display = "inline-block";
+
+    };
+    if (phone == ""){
+         $('#phone').css({"border":"1px solid red"});
+        document.getElementsByClassName('error-block')[0].style.display = "inline-block";
+    };
 
 
-    return false;};
+    var result = email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/ig );
+
+    if (!result && !(email == "")){
+        $('#email').css({"border":"1px solid red"});
+        return false
+    }
+
+    var result = email2.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/ig );
+
+    if (!result && !(email2 == "")){
+        $('#email2').css({"border":"1px solid red"});
+        return false
+    }
+
+    if (firstName == "" || last_name == "" || phone == ""){
+        return false;
+    }
+
     document.getElementsByClassName('error-block')[0].style.display = "none";
 
     document.getElementById('blanc').style.display = 'none';
     document.getElementById('add').style.display = 'block';
     document.getElementById('search').style.display = 'block';
     document.getElementById('accordion2').style.display = 'block';
+
+    $('#firstName').css({"border":""});
+    $('#last_name').css({"border":""});
+    $('#phone').css({"border":""});
+    $('#email').css({"border":""});
+    $('#email2').css({"border":""});
+
+
     //document.getElementById('select').style.display = 'none';
     contact={
         id:  new Date().getTime(),
@@ -84,6 +123,12 @@ for (var i=0; i<contacts.length;i++){
            blanc.children[i].value=null;
         }
     }
+
+    swal(
+        'SAVED',
+        contact.firstName+" "+contact.last_name,
+        'success'
+    )
 }
 function myBlurFunction() {
     // document.getElementById('search').style.width = '50%';
@@ -100,7 +145,7 @@ function zeroSearch(){
     var out=[]
     console.log(search.value);
     for(var i=0; i<contacts.length; i++){
-        if (contacts[i].firstName.toLocaleLowerCase().indexOf(search.value)!==-1){
+        if ((contacts[i].firstName.toLocaleLowerCase().indexOf(search.value)!==-1)||(contacts[i].last_name.toLocaleLowerCase().indexOf(search.value)!==-1)){
             out.push(contacts[i]);
             console.log(out)
         }
@@ -113,9 +158,9 @@ contact = out[i];
     }
 }
 
-
+//$(".btn").click(
 function edit() {
-    // firstName.value=last_name.value=phone.value=email.value=phone2.value=email2.value=null;
+    firstName.value=last_name.value=phone.value=email.value=phone2.value=email2.value=null;
     blanc.setAttribute("style", "display:block");
     document.getElementById('accordion2').style.display = 'none';
    var id=this.parentElement.id;
@@ -169,6 +214,7 @@ function edit() {
 document.getElementById('save').style.display="none";
 document.getElementById('saveChange').style.display="inline-block";
 }
+//)
 
 function createElement () {
     var div = document.createElement("div");
@@ -256,23 +302,95 @@ function createElementOld (i) {
 }
 function del() {
     var id=this.parentElement.id;
-
-    for(var i =0; contacts.length>i;i++){
-        if (contacts[i].id==id){
-            contacts.splice(i,1);
-            localStorage.setItem('pb.contacts', JSON.stringify(contacts));
-        }
-    }
-    $(this.parentElement.parentElement).addClass('animated bounceOutDown');
     var that=this;
-    setTimeout(function () {
-        that.parentElement.parentElement.parentElement.removeChild(that.parentElement.parentElement)
-    },1000)
+    swal({
+        title: 'Contact'+" "+contact.firstName+" "+'Will be DEL',
+        text: "",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then(function () {
+
+        for(var i =0; contacts.length>i;i++){
+            if (contacts[i].id==id){
+                contacts.splice(i,1);
+                localStorage.setItem('pb.contacts', JSON.stringify(contacts));
+            }
+        }
+        $(that.parentElement.parentElement).addClass('animated bounceOutDown');
+
+        setTimeout(function () {
+            that.parentElement.parentElement.parentElement.removeChild(that.parentElement.parentElement)
+        },1000)
+
+
+        swal(
+            'Deleted!',
+            'This looser has been deleted.',
+            'success'
+        )
+    },function () {
+
+    })
 
 }
 
 
 function saveChange(contact_id, firstName, last_name, phone, email, phone2, email2) {
+    var keys = ['contact_id','firstName', 'last_name', 'phone', 'email', 'phone2', 'email2'];
+    for (var i=1;i<arguments.length;i++){
+        if (arguments[i] !== "") {$('#'+keys[i]).css({"border":""});}
+    }
+
+
+    if (firstName == "" ){
+        $('#firstName').css({"border":"1px solid red"});
+        document.getElementsByClassName('error-block')[0].style.display = "inline-block";
+    };
+    if ( last_name == "" ){
+        $('#last_name').css({"border":"1px solid red"});
+        document.getElementsByClassName('error-block')[0].style.display = "inline-block";
+
+    };
+    if (phone == ""){
+        $('#phone').css({"border":"1px solid red"});
+        document.getElementsByClassName('error-block')[0].style.display = "inline-block";
+    };
+
+
+    var result = email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/ig );
+
+    if (!result && !(email == "")){
+        $('#email').css({"border":"1px solid red"});
+        return false
+    }
+
+    var result = email2.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/ig );
+
+    if (!result && !(email2 == "")){
+        $('#email2').css({"border":"1px solid red"});
+        return false
+    }
+
+    if (firstName == "" || last_name == "" || phone == ""){
+        return false;
+    }
+
+    document.getElementsByClassName('error-block')[0].style.display = "none";
+
+    $('#firstName').css({"border":""});
+    $('#last_name').css({"border":""});
+    $('#phone').css({"border":""});
+    $('#email').css({"border":""});
+    $('#email2').css({"border":""});
+
+    swal(
+        'SAVED',
+        contact.firstName+" "+contact.last_name,
+        'success'
+    )
     console.log(arguments);
     for(var i=0;contacts.length>i;i++){
         if(contact_id==contacts[i].id){
@@ -342,3 +460,4 @@ function getChar(event) {
 
     return null;
 }
+

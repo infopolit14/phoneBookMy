@@ -6,6 +6,11 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="bower_components/sweetalert2/dist/sweetalert2.min.css">
+
+        <!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link rel="stylesheet" href="css/animate.css">
         <link rel="stylesheet" href="css/main.css">
@@ -16,19 +21,20 @@
     <body>
     <div class="wrap">
 
+
         <p>
             <button class="btn btn-primary" type="button" onclick="addbtn()" id="add">Добавить контакт</button>
         </p>
-        <form class="navbar-search pull-left">
+
             <input type="text" class="search-query" autocomplete="off" placeholder="Search" id="search" onkeyup="zeroSearch()" onblur="myBlurFunction()" onclick="blueWidth()">
-        </form>
+
         <div class="fio" id="blanc">
             <input id="firstName" class="input-medium" type="text" placeholder="Фамилия" autofocus><br/>
             <input id="last_name" class="input-medium" type="text" placeholder="Имя"><br/>
             <div id="wrap_phone">
                 <input id="phone" class="input-medium" type="text" placeholder="Телефон" maxlength="10" onkeypress="phoneValid(phone.value)">
                 <i class='icon-plus-sign' id="secondP" onclick="secondPhone()"></i>
-                <input id="phone2" class="input-medium" type="text" placeholder="Телефон #2">
+                <input id="phone2" class="input-medium" type="text" placeholder="Телефон #2" maxlength="10">
                 <i class='icon-minus-sign' id="remSecondP" onclick="secondPhoneRemove()"></i><br/>
             </div>
             <div id ="wrap_email">
@@ -43,7 +49,8 @@
                 <button class="btn btn-success changeMy" type="button" id="saveChange" onclick="saveChange (blanc.className, firstName.value, last_name.value, phone.value, email.value, phone2.value, email2.value)">Сохранить изменения</button>
                 <button class="btn btn-warning" type="button" id="cancel" onclick="cancel()">Передумал</button>
             </p>
-        </div>
+            </div>
+
         <div class="accordion" id="accordion2">
 
         </div>
@@ -64,12 +71,13 @@
         <p>
             <button class="btn btn-primary" type="button" id="select" onclick="selectbtn()">Выйти из поиска</button>
         </p>-->
-    </form>
+
     </div>
 
-
     <script src="js/jquery.js"></script>
+    <script src="bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
+
     </body>
 </html>
