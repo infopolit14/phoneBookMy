@@ -23,7 +23,8 @@ if(localStorage['pb.contacts']){
    // document.getElementById('select').style.display = 'none';
     document.getElementById('saveChange').style.display = 'none';
     document.getElementById('save').style.display = 'inline-block';
-        secondPhoneRemove()
+        secondPhoneRemove();
+        secondEmailRemove()
 
 }
 function cancel() {
