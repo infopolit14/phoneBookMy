@@ -23,6 +23,7 @@ if(localStorage['pb.contacts']){
    // document.getElementById('select').style.display = 'none';
     document.getElementById('saveChange').style.display = 'none';
     document.getElementById('save').style.display = 'inline-block';
+        secondPhoneRemove()
 
 }
 function cancel() {
@@ -166,12 +167,7 @@ function edit() {
     document.getElementById('search').style.display = 'none';
     document.getElementById('add').style.display = 'none';
 
-    if(phone2.value!=" "){
-        secondPhone();
-    }
-    if(email2.value!=" "){
-        secondEmail();
-    }
+
 
    var id=this.parentElement.id;
    for(var i=0;i<contacts.length;i++){
@@ -223,6 +219,16 @@ function edit() {
 
 document.getElementById('save').style.display="none";
 document.getElementById('saveChange').style.display="inline-block";
+
+    if(phone2.value!=""){
+        secondPhone();
+    }
+    else secondPhoneRemove()
+    if(email2.value!=""){
+        secondEmail();
+    }
+    else secondEmailRemove()
+
 }
 //)
 
