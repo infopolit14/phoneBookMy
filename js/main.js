@@ -145,14 +145,14 @@ function zeroSearch(){
     var out=[]
     console.log(search.value);
     for(var i=0; i<contacts.length; i++){
-        if ((contacts[i].firstName.toLocaleLowerCase().indexOf(search.value)!==-1)||(contacts[i].last_name.toLocaleLowerCase().indexOf(search.value)!==-1)){
+        if ((contacts[i].firstName.toLocaleLowerCase().indexOf(search.value.toLocaleLowerCase())!==-1)||(contacts[i].last_name.toLocaleLowerCase().indexOf(search.value.toLocaleLowerCase())!==-1)){
             out.push(contacts[i]);
             console.log(out)
         }
     }
     accordion2.innerHTML=""
     for(var i=0; i<out.length; i++) {
-contact = out[i];
+        contact = out[i];
         createElement();
 
     }
@@ -163,6 +163,16 @@ function edit() {
     firstName.value=last_name.value=phone.value=email.value=phone2.value=email2.value=null;
     blanc.setAttribute("style", "display:block");
     document.getElementById('accordion2').style.display = 'none';
+    document.getElementById('search').style.display = 'none';
+    document.getElementById('add').style.display = 'none';
+
+    if(phone2.value!=" "){
+        secondPhone();
+    }
+    if(email2.value!=" "){
+        secondEmail();
+    }
+
    var id=this.parentElement.id;
    for(var i=0;i<contacts.length;i++){
        if(contacts[i].id==id){
@@ -340,6 +350,11 @@ function del() {
 
 function saveChange(contact_id, firstName, last_name, phone, email, phone2, email2) {
     var keys = ['contact_id','firstName', 'last_name', 'phone', 'email', 'phone2', 'email2'];
+
+    document.getElementById('search').style.display = 'inline-block';
+    document.getElementById('add').style.display = 'inline-block';
+    document.getElementById('add').style.display = 'inline-block';
+
     for (var i=1;i<arguments.length;i++){
         if (arguments[i] !== "") {$('#'+keys[i]).css({"border":""});}
     }
