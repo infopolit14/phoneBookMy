@@ -3,6 +3,9 @@ let contact = {};
 
 let contacts = [];
 
+let q;
+
+let p;
 
 if(!localStorage['pb.contacts']){
     localStorage.setItem('pb.contacts', JSON.stringify([]));
@@ -447,22 +450,27 @@ function secondPhone(){
     document.getElementById('secondP').style.display ='none';
     document.getElementById('phone2').style.display ='inline-block';
     document.getElementById('remSecondP').style.display ='inline-block';
+    phone2.value=q || phone2.value;
 }
 function secondEmail(){
     document.getElementById('secondE').style.display ='none';
     document.getElementById('email2').style.display ='inline-block';
     document.getElementById('remSecondE').style.display ='inline-block';
+    email2.value=p || email2.value;
 }
 function secondPhoneRemove(){
     document.getElementById('remSecondP').style.display ='none';
     document.getElementById('phone2').style.display ='none';
     document.getElementById('secondP').style.display ='inline-block';
+    q = phone2.value;
+    phone2.value='';
 }
 function secondEmailRemove(){
     document.getElementById('secondE').style.display ='inline-block';
     document.getElementById('email2').style.display ='none';
     document.getElementById('remSecondE').style.display ='none';
-    // $('#email2').addClass('animated shake');
+    p = email2.value;
+    email2.value = '';
 }
 
 phone.onkeypress = phone2.onkeypress = function(e) {
